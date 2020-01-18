@@ -21,9 +21,9 @@ public class PostRepositoryTest {
         post.setTitle("hibernate");
         postRepository.save(post);
 
-        //postRepository.findMyPost();
+        postRepository.findMyPost();
 
         postRepository.delete(post);
-        //postRepository.flush();
+        postRepository.flush();
     }
 }
