@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class PostCustomRepositorySujin implements PostCustomRepository<Post> {
+public class PostCustomRepositoryImpl implements PostCustomRepository<Post> {
 
     @Autowired
     EntityManager entityManager;
