@@ -2,12 +2,15 @@ package me.whiteship.demojpa.post;
 
 
 
+import javafx.geometry.Pos;
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.Date;
 
 @Entity
-public class Post {
+public class Post{
 
     @Id @GeneratedValue
     private Long id;
