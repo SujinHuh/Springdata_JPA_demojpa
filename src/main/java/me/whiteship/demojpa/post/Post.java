@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.Date;
 
 @Entity
-public class Post{
+public class Post extends AbstractAggregateRoot<Post>{
 
     @Id @GeneratedValue
     private Long id;
@@ -54,4 +54,12 @@ public class Post{
     public void setCreated(Date created) {
         this.created = created;
     }
+
+    public Post publish(){
+
+        this.registerEvent(new PostPublishedEvent(this));
+        return this;
+    }
+
 }
+

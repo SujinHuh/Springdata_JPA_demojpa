@@ -22,22 +22,6 @@ public class PostRepositoryTest {
     @Autowired
     PostRepository postRepository;
 
-    @Autowired
-    ApplicationContext applicationContext;
-
-    @Test
-    public void event() {
-        Post post = new Post();
-        post.setTitle("event");
-        PostPublishedEvent event = new PostPublishedEvent(post);
-
-        applicationContext.publishEvent(event);//퍼블리싱
-
-        //Listener
-
-
-    }
-
     @Test
     public void crud() {
 
@@ -46,7 +30,7 @@ public class PostRepositoryTest {
 
         assertThat(postRepository.contains(post)).isFalse();//객체상태: transient : JPA가 모르는 상태
 
-        postRepository.save(post);
+        postRepository.save(post.publish());
 
         assertThat(postRepository.contains(post)).isTrue();//객체상태: Persisten : JPA가 관리중인 상
 
