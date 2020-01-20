@@ -1,6 +1,7 @@
 package me.whiteship.demojpa.post;
 
 
+import com.querydsl.core.types.Predicate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.applet.AppletContext;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,14 +29,15 @@ public class PostRepositoryTest {
 
         Post post = new Post();
         post.setTitle("hibernate");
-
-        assertThat(postRepository.contains(post)).isFalse();//객체상태: transient : JPA가 모르는 상태
-
         postRepository.save(post.publish());
 
-        assertThat(postRepository.contains(post)).isTrue();//객체상태: Persisten : JPA가 관리중인 상
 
-        postRepository.delete(post);
-        postRepository.flush();
+        Predicate predicate = QPost.post.title.containsIgnoreCase("hibernate");
+        Optional<Post> one = postRepository.findOne(predicate);
+
+        assertThat(one).isEmpty();
+
+
+
     }
 }
